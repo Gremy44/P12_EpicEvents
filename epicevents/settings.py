@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authentication',
+    'customer_management',
+    'event_management',
     'rest_framework',
     'rest_framework.authtoken',
     # 'django-filters',
@@ -79,7 +82,7 @@ WSGI_APPLICATION = 'epicevents.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'epicevent_db',
+        'NAME': 'epicevents_db_2',
         'USER': 'epicevent_user',
         'PASSWORD' : 'admin',
         'HOST': 'localhost',
@@ -128,3 +131,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'authentication.User'
