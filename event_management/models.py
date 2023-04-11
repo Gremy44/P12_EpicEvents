@@ -9,18 +9,21 @@ class Status(models.Model):
         verbose_name_plural = "Status"
 
     name = models.CharField(max_length=25)
+    
+    def __str__(self) -> str:
+        return str(self.name)
 
 class Contract(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-    status = models.BooleanField(default=False)
+    status = models.BooleanField(default=False, verbose_name='Signed')
     amount = models.FloatField()
-    payment_due = models.TimeField(auto_now_add=True)
+    payment_due = models.DateTimeField(auto_now_add=False)
     sales_contact = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     
     def __str__(self) -> str:
-        return self.client
+        return str(self.client)
     
 class Event(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
@@ -33,4 +36,4 @@ class Event(models.Model):
     notes = models.TextField()
     
     def __str__(self) -> str:
-        return self.client + ' --- ' + self.event_date
+        return str(str(self.client) + ' --- ' + str(self.event_date))

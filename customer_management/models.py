@@ -14,10 +14,10 @@ class Prospect(models.Model):
         return self.company_name
 
 class Client(models.Model):
-    id_prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE)
+    id_prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE, null=True, blank=True)
     company_name = models.CharField(max_length=25)
     email = models.EmailField()
-    phone = models.CharField(max_length=20)
+    phone = models.CharField(blank=True, max_length=20)
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
     mobile = models.CharField(max_length=20)
