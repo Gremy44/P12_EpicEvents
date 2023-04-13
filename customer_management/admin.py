@@ -29,6 +29,12 @@ def make_client(Prospect, request, queryset):
 
 class ProspectAdmin(admin.ModelAdmin):
     
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'sales_contact':  # Nom du champ ForeignKey à filtrer
+            # Appliquer un filtre sur le champ 'sales_contact' en utilisant un queryset
+            kwargs['queryset'] = User.objects.filter(role='VT') # Remplacez 'VENDEURS' par le nom de votre groupe
+
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
     actions = [make_client]
     
     
@@ -41,7 +47,7 @@ class ClientAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'sales_contact':  # Nom du champ ForeignKey à filtrer
             # Appliquer un filtre sur le champ 'sales_contact' en utilisant un queryset
-            kwargs['queryset'] = User.objects.filter(groups__name='Sale') # Remplacez 'VENDEURS' par le nom de votre groupe
+            kwargs['queryset'] = User.objects.filter(role='VT') # Remplacez 'VENDEURS' par le nom de votre groupe
 
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
     

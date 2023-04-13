@@ -17,15 +17,15 @@ class User(AbstractUser):
         verbose_name_plural = "Staff"
 
     phone = models.CharField(blank=True, max_length=20)
-    groups = models.ManyToManyField(help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.group', verbose_name='groups')
+    role = models.CharField(max_length=7, choices=USER_STATUS, default='VT')
     is_staff = models.BooleanField(default=True, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')
     
+    def set_password(self, password):
+        """
+        Méthode pour définir le mot de passe de l'utilisateur de manière sécurisée.
+        """
+        self.password = make_password(password)
+
     def __str__(self):
         return self.username
     
-@receiver(pre_save, sender=User)
-def encrypt_password(sender, instance, **kwargs):
-    """
-    Signal handler to encrypt the password before saving the User instance.
-    """
-    instance.password = make_password(instance.password)

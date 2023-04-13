@@ -1,0 +1,98 @@
+{
+    "Gestion": {
+        "User": {
+            "GET": true,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Prospect": {
+            "GET": false,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Client": {
+            "GET": false,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Contract": {
+            "GET": false,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Event": {
+            "GET": false,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        }
+    },
+    "Vente": {
+        "User": {
+            "GET": true,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Prospect": {
+            "GET": true,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Client": {
+            "GET": true,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Contract": {
+            "GET": true,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Event": {
+            "GET": true,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        }
+    },
+    "Support": {
+        "User": {
+            "GET": true,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Prospect": {
+            "GET": false,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Client": {
+            "GET": false,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Contract": {
+            "GET": false,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        },
+        "Event": {
+            "GET": false,
+            "POST": false,
+            "UPDATE": false,
+            "DELETE": false
+        }
+    }
+}
