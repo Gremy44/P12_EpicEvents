@@ -1,9 +1,27 @@
 from django.contrib import admin
-from django.contrib.auth.models import Group
 from django import forms
-from django.contrib.admin.widgets import FilteredSelectMultiple
 
 from authentication.models import User
+
+from epicevents.permissions import CustomPermission
+
+from customer_management.admin import (Client,
+                                       ClientAdmin,
+                                       Prospect,
+                                       ProspectAdmin)
+
+from event_management.admin import (Contract,
+                                    ContractAdmin,
+                                    Event,
+                                    EventAdmin,
+                                    Status)
+
+
+class MyAdmin(admin.AdminSite):
+    
+    site_header = "EpicEvent Administration"
+    site_title = "EpicEvent"
+    final_catch_all_view = False
 
 
 class UserAdminForm(forms.ModelForm):
@@ -20,7 +38,14 @@ class UserAdmin(admin.ModelAdmin):
     
     form = UserAdminForm
     
-    list_display = ['first_name', 'last_name', 'username', 'email', 'phone']
+    list_display = ['first_name', 'last_name', 'username', 'email', 'role', 'phone']
 
-   
-admin.site.register(User, UserAdmin)
+
+admin_site = MyAdmin(name="admin")
+
+admin_site.register(User, UserAdmin)
+admin_site.register(Client, ClientAdmin)
+admin_site.register(Prospect, ProspectAdmin)
+admin_site.register(Contract, ContractAdmin)
+admin_site.register(Event, EventAdmin)
+admin_site.register(Status)

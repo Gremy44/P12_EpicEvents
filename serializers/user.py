@@ -1,5 +1,4 @@
 from rest_framework import serializers
-# from django.contrib.auth.models import User
 from authentication.models import User
 
 
@@ -23,8 +22,10 @@ class UserSerializer(serializers.Serializer):
         model = User
         fields = '__all__'
         extra_kwargs = {'password': {'write_only': True}}
+        app_label="authentication"
 
     def create(self, validated_data):
+        password = validated_data.pop('password')
         user = User(
             username=validated_data['username'],
             first_name=validated_data['first_name'],
@@ -33,7 +34,7 @@ class UserSerializer(serializers.Serializer):
             phone=validated_data['phone'],
             role=validated_data['role'],
         )
-        user.set_password(validated_data['password'])
+        user.set_password(password)
         user.save()
         return user
     

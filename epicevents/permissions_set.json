@@ -1,34 +1,40 @@
 {
     "Gestion": {
         "User": {
-            "GET": true,
+            "GET": false,
             "POST": false,
-            "UPDATE": false,
-            "DELETE": false
+            "UPDATE": true,
+            "DELETE": true
         },
         "Prospect": {
-            "GET": false,
-            "POST": false,
-            "UPDATE": false,
-            "DELETE": false
+            "GET": true,
+            "POST": true,
+            "UPDATE": true,
+            "DELETE": true
         },
         "Client": {
-            "GET": false,
-            "POST": false,
-            "UPDATE": false,
-            "DELETE": false
+            "GET": true,
+            "POST": true,
+            "UPDATE": true,
+            "DELETE": true
         },
         "Contract": {
-            "GET": false,
-            "POST": false,
-            "UPDATE": false,
-            "DELETE": false
+            "GET": true,
+            "POST": true,
+            "UPDATE": true,
+            "DELETE": true
         },
         "Event": {
-            "GET": false,
-            "POST": false,
-            "UPDATE": false,
-            "DELETE": false
+            "GET": true,
+            "POST": true,
+            "UPDATE": true,
+            "DELETE": true
+        },
+        "Status": {
+            "GET": true,
+            "POST": true,
+            "UPDATE": true,
+            "DELETE": true
         }
     },
     "Vente": {
@@ -40,19 +46,19 @@
         },
         "Prospect": {
             "GET": true,
-            "POST": false,
-            "UPDATE": false,
+            "POST": true,
+            "UPDATE": true,
             "DELETE": false
         },
         "Client": {
             "GET": true,
-            "POST": false,
-            "UPDATE": false,
+            "POST": true,
+            "UPDATE": true,
             "DELETE": false
         },
         "Contract": {
             "GET": true,
-            "POST": false,
+            "POST": true,
             "UPDATE": false,
             "DELETE": false
         },
@@ -60,6 +66,12 @@
             "GET": true,
             "POST": false,
             "UPDATE": false,
+            "DELETE": false
+        },
+        "Status": {
+            "GET": true,
+            "POST": true,
+            "UPDATE": true,
             "DELETE": false
         }
     },
@@ -71,27 +83,33 @@
             "DELETE": false
         },
         "Prospect": {
-            "GET": false,
+            "GET": true,
             "POST": false,
             "UPDATE": false,
             "DELETE": false
         },
         "Client": {
-            "GET": false,
+            "GET": true,
             "POST": false,
             "UPDATE": false,
             "DELETE": false
         },
         "Contract": {
-            "GET": false,
+            "GET": true,
             "POST": false,
-            "UPDATE": false,
+            "UPDATE": true,
             "DELETE": false
         },
         "Event": {
-            "GET": false,
-            "POST": false,
-            "UPDATE": false,
+            "GET": true,
+            "POST": true,
+            "UPDATE": true,
+            "DELETE": false
+        },
+        "Status": {
+            "GET": true,
+            "POST": true,
+            "UPDATE": true,
             "DELETE": false
         }
     }

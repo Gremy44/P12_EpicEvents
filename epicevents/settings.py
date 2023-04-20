@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'django.contrib.admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,7 +44,6 @@ INSTALLED_APPS = [
     'event_management',
     'rest_framework',
     'rest_framework_simplejwt',
-    # 'django-filters',
 ]
 
 MIDDLEWARE = [
@@ -61,9 +61,8 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 25,
     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
     'DEFAULT_PERMISSION_CLASSES': [
-        'epicevents.permissions.Is_Sale',
-        'epicevents.permissions.Is_Support',
-        'epicevents.permissions.Is_Gestion',]
+        'rest_framework.permissions.DjangoModelPermissions',
+        ]
 }
 
 ROOT_URLCONF = 'epicevents.urls'

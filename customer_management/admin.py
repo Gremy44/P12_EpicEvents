@@ -1,14 +1,10 @@
 from django.contrib import admin
-from django.contrib.auth.models import Group
 from django.contrib import messages
-
-
-from django.urls import reverse
 from django.shortcuts import redirect
-from django.utils.html import format_html
 
-from customer_management.models import Client, Prospect
 from authentication.models import User
+from models.client import Client
+from models.prospect import Prospect
 
 
 @admin.action(description="Transform in client")
@@ -40,10 +36,6 @@ class ProspectAdmin(admin.ModelAdmin):
     
 class ClientAdmin(admin.ModelAdmin):
     
-    '''seller = User.objects.filter(groups=1) # 1
-    supporter = User.objects.filter(groups=2) # 2
-    gestioner = User.objects.filter(groups=3) # 3'''
-    
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'sales_contact':  # Nom du champ ForeignKey à filtrer
             # Appliquer un filtre sur le champ 'sales_contact' en utilisant un queryset
@@ -61,7 +53,4 @@ class ClientAdmin(admin.ModelAdmin):
                     'sales_contact',
                     ]
 
-
-admin.site.register(Client, ClientAdmin)  
-admin.site.register(Prospect, ProspectAdmin)  
     
