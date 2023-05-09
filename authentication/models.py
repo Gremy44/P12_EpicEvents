@@ -1,7 +1,10 @@
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
 from django.contrib.auth.hashers import make_password
+
+from epicevents.permissions import Permissions
 
 
 class User(AbstractUser):
@@ -18,7 +21,8 @@ class User(AbstractUser):
     phone = models.CharField(blank=True, max_length=20)
     role = models.CharField(max_length=7, choices=USER_STATUS, default='VT')
     is_staff = models.BooleanField(default=True, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')
-    
+    is_admin = models.BooleanField(default=True)
+
     def save(self, *args, **kwargs):
         # Appeler set_password avant d'enregistrer l'utilisateur
         if self.password and not self.password.startswith('pbkdf2_'):

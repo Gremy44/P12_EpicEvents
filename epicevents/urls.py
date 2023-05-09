@@ -34,15 +34,15 @@ router.register(r'api/actual-user', ActualUserView, basename='actual-user')
 # Vues pour les utilisateurs
 router.register(r'api/authentication/user', UserViewset, basename='user')
 # Vues pour les clients
-router.register(r'api/customer_management/client', ClientViewset, basename='client')
+router.register(r'api/customer-management/client', ClientViewset, basename='client')
 # Vues pour les prospects
-router.register(r'api/customer_management/prospect', ProspectViewset, basename='prospect')
+router.register(r'api/customer-management/prospect', ProspectViewset, basename='prospect')
 # Vues pour les événements
-router.register(r'api/event_management/event', EventViewset, basename='event')
+router.register(r'api/event-management/event', EventViewset, basename='event')
 # Vues pour les contrats
-router.register(r'api/event_management/contract', ContractViewset, basename='contract')
+router.register(r'api/event-management/contract', ContractViewset, basename='contract')
 # Vues pour les statuts
-router.register(r'api/event_management/status', StatusViewset, basename='status')
+router.register(r'api/event-management/status', StatusViewset, basename='status')
 
 
 urlpatterns = [

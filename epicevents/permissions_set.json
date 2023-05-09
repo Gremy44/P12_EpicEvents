@@ -1,8 +1,8 @@
 {
     "Gestion": {
         "User": {
-            "GET": false,
-            "POST": false,
+            "GET": true,
+            "POST": true,
             "UPDATE": true,
             "DELETE": true
         },
@@ -40,8 +40,8 @@
     "Vente": {
         "User": {
             "GET": true,
-            "POST": false,
-            "UPDATE": false,
+            "POST": true,
+            "UPDATE": true,
             "DELETE": false
         },
         "Prospect": {
@@ -59,19 +59,19 @@
         "Contract": {
             "GET": true,
             "POST": true,
-            "UPDATE": false,
+            "UPDATE": true,
             "DELETE": false
         },
         "Event": {
             "GET": true,
-            "POST": false,
+            "POST": true,
             "UPDATE": false,
             "DELETE": false
         },
         "Status": {
             "GET": true,
-            "POST": true,
-            "UPDATE": true,
+            "POST": false,
+            "UPDATE": false,
             "DELETE": false
         }
     },

@@ -1,9 +1,11 @@
+from django.contrib.auth.models import Permission
 from django.contrib import admin
+from django.apps import apps
 from django import forms
 
 from authentication.models import User
 
-from epicevents.permissions import CustomPermission
+from epicevents.permissions import Permissions
 
 from customer_management.admin import (Client,
                                        ClientAdmin,
@@ -14,7 +16,8 @@ from event_management.admin import (Contract,
                                     ContractAdmin,
                                     Event,
                                     EventAdmin,
-                                    Status)
+                                    Status,
+                                    StatusAdmin)
 
 
 class MyAdmin(admin.AdminSite):
@@ -24,7 +27,7 @@ class MyAdmin(admin.AdminSite):
     final_catch_all_view = False
 
 
-class UserAdminForm(forms.ModelForm):
+class UserAdminForm(Permissions, forms.ModelForm):
     
     password = forms.CharField(widget=forms.PasswordInput)
     
@@ -34,7 +37,7 @@ class UserAdminForm(forms.ModelForm):
         exclude = ['last_login', 'is_superuser', 'date_joined', 'user_permissions']
 
 
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(Permissions, admin.ModelAdmin):
     
     form = UserAdminForm
     
@@ -48,4 +51,4 @@ admin_site.register(Client, ClientAdmin)
 admin_site.register(Prospect, ProspectAdmin)
 admin_site.register(Contract, ContractAdmin)
 admin_site.register(Event, EventAdmin)
-admin_site.register(Status)
+admin_site.register(Status, StatusAdmin)

@@ -1,10 +1,12 @@
 from django.contrib import admin
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.contrib import admin
 
 from authentication.models import User
 from models.client import Client
 from models.prospect import Prospect
+from epicevents.permissions import Permissions
 
 
 @admin.action(description="Transform in client")
@@ -17,13 +19,13 @@ def make_client(Prospect, request, queryset):
         email = list(queryset.values_list('email', flat=True))[0]
         phone = list(queryset.values_list('phone', flat=True))[0]
 
-        url_ajout_client = '/admin/customer_management/client/add/'  # Nom de la vue pour votre page d'ajout de client
-        url_ajout_client += f'?company_name={company_name}&email={email}&phone={phone}'  # Ajout des paramètres de requête à l'URL
-        
+        url_ajout_client = '/admin/customer-management/client/add/'  
+        url_ajout_client += f'?company_name={company_name}&email={email}&phone={phone}'  
+ 
         return redirect(url_ajout_client)
 
 
-class ProspectAdmin(admin.ModelAdmin):
+class ProspectAdmin(Permissions, admin.ModelAdmin):
     
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'sales_contact':  # Nom du champ ForeignKey à filtrer
@@ -34,7 +36,7 @@ class ProspectAdmin(admin.ModelAdmin):
     actions = [make_client]
     
     
-class ClientAdmin(admin.ModelAdmin):
+class ClientAdmin(Permissions, admin.ModelAdmin):
     
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'sales_contact':  # Nom du champ ForeignKey à filtrer
@@ -42,6 +44,7 @@ class ClientAdmin(admin.ModelAdmin):
             kwargs['queryset'] = User.objects.filter(role='VT') # Remplacez 'VENDEURS' par le nom de votre groupe
 
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    
     
     fields = [ 
                     'company_name',
@@ -52,5 +55,4 @@ class ClientAdmin(admin.ModelAdmin):
                     'mobile'),
                     'sales_contact',
                     ]
-
     

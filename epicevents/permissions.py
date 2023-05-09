@@ -1,9 +1,16 @@
-from rest_framework.permissions import BasePermission, IsAuthenticated
+from django.contrib.auth.models import Permission
+from rest_framework.permissions import BasePermission
 import json
+
+from models.event import Event
+from models.contract import Contract
+from models.status import Status
+from models.client import Client
+from models.prospect import Prospect
 
 
 class Permissions():
-    
+
     def role_translate(self, role):
         if role == 'SP':
             role = 'Support'
@@ -18,11 +25,8 @@ class Permissions():
                 data = json.load(f)
                 return data
     
-    def request_permissions_set(self, request):
-        
-        print('IS_STAFF : ', request.user.is_staff)
-        
-        request_type = request.method
+    def request_permissions_set(self, request, request_type):
+
         user_role = self.role_translate(request.user.role)
         try :
             model_request = request.path.split('/')[3].title()
@@ -30,45 +34,60 @@ class Permissions():
             model_request = None
         jsondata = self.json_loader('epicevents\permissions_set.json')
         
+        url = request.get_full_path()
+        url_parts = url.split("/")
+        last_part = url_parts[-1]
+        
         for role in jsondata:
             if role == user_role:
                 for model in jsondata[role]:
                     if model == model_request:
                         for in_request in jsondata[role][model]:
                             if in_request == request_type:
-                                print(f'{role}|{user_role} --- {model}|{model_request} --- {in_request}|{request_type}')
+                                # print(f'{role}|{user_role} --- {model}|{model_request} --- {in_request}|{request_type}')
                                 return jsondata[role][model][in_request]
-        print('DAMN NOOO')
-        if request.user.is_staff:
-            return True
         return False
     
     def has_view_permission(self, request, obj=None):
-        print(request.user.is_staff)
-        if request.user.is_staff:
-            return True
+        # print("1")
+        # method = 'GET'
+        # permission = self.request_permissions_set(request, method)
+        # print('PERMISSIONS POST: ', permission)
+        return True
         
     def has_add_permission(self, request, obj=None):
-        print(request.user.is_staff)
-        if request.user.is_staff:
-            return True
-        return self.request_permissions_set(request)
+        # print("2")
+        method = 'POST'
+        permission = self.request_permissions_set(request, method)
+        # print('PERMISSIONS POST: ', permission)
+        return permission
 
     def has_change_permission(self, request, obj=None):
-        print(request.user.is_staff)
-        if request.user.is_staff:
-            return True
-        return self.request_permissions_set(request)
+        # print("3")
+        method = 'UPDATE'
+        permission = self.request_permissions_set(request, method)
+        # print('PERMISSIONS UPDATE: ', permission)
+        return permission
 
     def has_delete_permission(self, request, obj=None):
-        print(request.user.is_staff)
-        if request.user.is_staff:
-            return True
-        return self.request_permissions_set(request)
+        # print("4")
+        method = 'DELETE'
+        permission = self.request_permissions_set(request, method)
+        # print('PERMISSIONS DELETE: ', permission)
+        return permission
 
 
-class CustomPermission():
-    def has_view_permission(self, request, obj=None):
-        print(request.user.is_staff)
-        if request.user.is_staff:
-            return True
+class Permissions_API(BasePermission):
+    perm = Permissions()
+    
+    def has_permission(self, request, view):
+        method = request.method
+        permission = self.perm.request_permissions_set(request, method)
+        print(f'REQUEST : type: {method} --- permissions: {permission}')
+        return permission
+
+    def has_object_permission(self, request, view, obj):
+        method = request.method
+        permission = self.perm.request_permissions_set(request, method)
+        print(f'REQUEST : type: {method} --- permissions: {permission}')
+        return permission

@@ -5,8 +5,10 @@ from models.contract import Contract
 from models.event import Event
 from models.status import Status
 
+from epicevents.permissions import Permissions
 
-class ContractAdmin(admin.ModelAdmin):
+
+class ContractAdmin(Permissions, admin.ModelAdmin):
         
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'sales_contact':  # Nom du champ ForeignKey à filtrer
@@ -18,7 +20,7 @@ class ContractAdmin(admin.ModelAdmin):
     fields = ('client', 'amount', 'payment_due', 'sales_contact', 'status')
     exclude = ['date_created', 'date_updated']
     
-class EventAdmin(admin.ModelAdmin):
+class EventAdmin(Permissions, admin.ModelAdmin):
     
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'support_contact':  # Nom du champ ForeignKey à filtrer
@@ -27,3 +29,5 @@ class EventAdmin(admin.ModelAdmin):
 
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
     
+class StatusAdmin(Permissions, admin.ModelAdmin):
+    pass

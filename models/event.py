@@ -19,7 +19,7 @@ class Event(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     support_contact = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     attentees = models.IntegerField()
-    event_date = models.DateTimeField(auto_now_add=True)
+    event_date = models.DateTimeField()
     notes = models.TextField()
     
     def __str__(self) -> str:
